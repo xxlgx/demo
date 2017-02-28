@@ -9,10 +9,9 @@
                         <div class="mui-media-body">{{val.name}}</div>
                     </router-link>
                 </li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-4">
+                <li class="mui-table-view-cell mui-media mui-col-xs-4"></li>
             </ul>
         </div>
-
         <div class="loading" v-show="listData == false">
             <img src="../../common/img/loading.gif" class="loadingimg">
         </div>
