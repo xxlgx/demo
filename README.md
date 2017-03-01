@@ -1,4 +1,3 @@
-Vue 豆瓣练习
-clone之后
-下载依赖- npm install
-打包 npm run dist
+Vue 豆瓣练习</br>
+git clone https://github.com/xxlgx/demo.git</br>
+bulid是打包好的文件</br>
