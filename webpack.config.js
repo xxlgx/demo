@@ -1,14 +1,12 @@
-/**
- * Created by Pamo on 2017/2/22.
- */
-var htmlplugin =require('html-webpack-plugin');
+
+let htmlplugin =require('html-webpack-plugin');
 module.exports = {
     // 入口文件
     entry: ['./src/main.js'],
     // 出口文件
     output: {
         // 出口文件路径
-        path: './bulid',
+        path: './build',
         // 出口文件名
         filename: 'build.js'
     },

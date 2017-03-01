@@ -1,6 +1,4 @@
-/**
- * Created by Pamo on 2017/2/22.
- */
+
 import Vue from 'vue'
 import App from './App.vue'
 
@@ -17,12 +15,12 @@ import './common/mui/css/icons-extra.css'
 import 'mint-ui/lib/style.css'
 import Mint from 'mint-ui'
 Vue.use(Mint);//使用
-
+//初始化样式
 import './common/css/stylus/public.styl'
 
 new Vue({
     store,
     el: '#app',
-    router,
+    router,//路由
     render: create => create(App)
 });

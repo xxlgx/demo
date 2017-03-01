@@ -1,6 +1,4 @@
-/**
- * Created by Pamo on 2017/2/22.
- */
+
 import vue from 'vue';
 
 export default {
