@@ -47,7 +47,7 @@ module.exports = {
         new htmlplugin({
             title:'index',
             filename:'index.html',
-            template:'index.html'
+            template:'xx.html'
         })
     ],
     // devServer: {
