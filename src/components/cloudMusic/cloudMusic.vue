@@ -48,7 +48,7 @@
                 let left=this;
                 setTimeout(function () {
                     left.fn=true;
-                },2000);
+                },3000);
             }
 
         },

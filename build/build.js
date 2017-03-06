@@ -92,8 +92,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_vue2.default.use(_vueResource2.default); //使用请求
-	//引入请求
 
+	//引入请求
+	//引用路由
 
 	//图片懒加载
 
@@ -101,12 +102,14 @@
 	    preLoad: 1.3,
 	    error: 'common/img/sosuo.png',
 	    loading: 'common/img/lozy.gif',
-	    attempt: 1
+	    attempt: 1,
+	    try: 3
 	});
 
 	//ui组件包
 
 	_vue2.default.use(_mintUi2.default); //使用
+
 	//初始化样式
 
 
@@ -13856,8 +13859,7 @@
 	exports.default = {
 	    url: 'https://api.douban.com/',
 	    murl: 'https://m.douban.com/rexxar/api',
-	    vm: new _vue2.default(),
-	    songData: {}
+	    vm: new _vue2.default()
 	};
 
 /***/ },
@@ -15189,7 +15191,7 @@
 
 
 	// module
-	exports.push([module.id, "\n#box[data-v-10e1481e] {\n  width: 100%;\n  padding: 40px 0 60px 0;\n}\n#box .mui-table-view[data-v-10e1481e]:after {\n  background-color: #fff;\n}\n#box .mui-content>ul[data-v-10e1481e] {\n  padding: 0;\n}\n#box .mui-content>ul>li[data-v-10e1481e] {\n  padding: 10px 0 0 12px;\n}\n#box .mui-content>h5[data-v-10e1481e] {\n  height: 36px;\n  line-height: 36px;\n  padding-left: 14px;\n}\n", ""]);
+	exports.push([module.id, "\n#box[data-v-10e1481e] {\n  width: 100%;\n  padding: 40px 0 50px 0;\n  position: absolute;\n  height: 100%;\n}\n#box .mui-table-view[data-v-10e1481e]:after {\n  background-color: #fff;\n}\n#box .mui-content[data-v-10e1481e] {\n  padding-bottom: 50px;\n}\n#box .mui-content>ul[data-v-10e1481e] {\n  padding: 0;\n}\n#box .mui-content>ul>li[data-v-10e1481e] {\n  padding: 10px 0 0 12px;\n}\n#box .mui-content>h5[data-v-10e1481e] {\n  height: 36px;\n  line-height: 36px;\n  padding-left: 14px;\n}\n#box .loading[data-v-10e1481e] {\n  position: relative;\n  width: 100%;\n  height: 100%;\n}\n#box .loading .loa[data-v-10e1481e] {\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  margin-left: -0.35rem;\n  margin-top: -0.12rem;\n}\n", ""]);
 
 	// exports
 
@@ -15223,13 +15225,13 @@
 	//
 	//
 	//
-	//
 
 	exports.default = {
 	    data: function data() {
 	        return {
 	            listID: ['8325', '6452', '2116', '3684', '8327', '8328', '6453', '6652', '9548', '8926', '10204', '2849', '7652', '3702', '4592', '5538', '12437', '8326'], //歌手id
-	            listData: [] //请求回来的数据
+	            listData: [], //请求回来的数据
+	            fn: false
 	        };
 	    },
 
@@ -15251,10 +15253,31 @@
 	        sendData: function sendData(id) {
 	            //点击事件跳转路由
 	            this.$router.push({ name: 'cloudDetial', params: { cloudID: id } });
+	        },
+	        flag: function flag() {
+	            //延迟2秒加载数据
+	            var left = this;
+	            setTimeout(function () {
+	                left.fn = true;
+	            }, 2000);
+	        }
+	    },
+	    directives: { //自定义指令
+	        img: {
+	            inserted: function inserted(el, val) {
+	                el.style.backgroundImage = 'url(./src/common/img/lozy.gif)'; //当前元素加载
+	                var img = new Image(); //创建Img标签
+	                img.src = val.value; //获取当前的val值
+	                img.onload = function () {
+	                    //当加载完成之后
+	                    el.style.backgroundImage = 'url(' + val.value + ')'; //改变图片地址路径
+	                };
+	            }
 	        }
 	    },
 	    created: function created() {
-	        this.getData();
+	        this.getData(); //初始数据
+	        this.flag(); //延迟2秒
 	    }
 	};
 
@@ -15277,26 +15300,51 @@
 	      "background-color": "#efeff4"
 	    }
 	  }, [_vm._v("为你推荐")]), _vm._v(" "), _c('ul', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.fn),
+	      expression: "fn"
+	    }],
 	    staticClass: "mui-table-view mui-grid-view"
 	  }, [_vm._l((_vm.listData), function(val, index, key) {
 	    return _c('li', {
 	      staticClass: "mui-table-view-cell mui-media mui-col-xs-4"
 	    }, [_c('router-link', _vm._b({}, 'router-link', {
 	      to: '/cloudDetial/' + val.name + '/' + val.id
-	    }), [_c('img', {
+	    }), [_c('div', {
 	      directives: [{
-	        name: "lazy",
-	        rawName: "v-lazy",
+	        name: "img",
+	        rawName: "v-img",
 	        value: (val.picUrl),
 	        expression: "val.picUrl"
 	      }],
-	      staticClass: "mui-media-object"
+	      staticClass: "mui-media-object",
+	      staticStyle: {
+	        "height": ".9rem",
+	        "background-size": "contain"
+	      }
 	    }), _vm._v(" "), _c('div', {
 	      staticClass: "mui-media-body"
 	    }, [_vm._v(_vm._s(val.name))])])], 1)
 	  }), _vm._v(" "), _c('li', {
 	    staticClass: "mui-table-view-cell mui-media mui-col-xs-4"
-	  })], 2)])])
+	  })], 2)]), _vm._v(" "), _c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.fn == false),
+	      expression: "fn == false"
+	    }],
+	    staticClass: "loading"
+	  }, [_c('mt-spinner', {
+	    staticClass: "loa",
+	    attrs: {
+	      "type": "triple-bounce",
+	      "color": "rgb(100, 100, 100)",
+	      "size": 60
+	    }
+	  })], 1)])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
