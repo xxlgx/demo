@@ -15259,7 +15259,7 @@
 	            var left = this;
 	            setTimeout(function () {
 	                left.fn = true;
-	            }, 2000);
+	            }, 3000);
 	        }
 	    },
 	    directives: { //自定义指令
