@@ -19,6 +19,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+    //引入加载中图片
+    var imgUrl = require('../../common/img/lozy.gif');
+
     export default {
         data() {
             return {
@@ -55,7 +58,7 @@
         directives:{//自定义指令
             img:{
                 inserted:function (el, val) {
-                    el.style.backgroundImage='url(./src/common/img/lozy.gif)';//当前元素加载
+                    el.style.backgroundImage='url('+imgUrl+')';//当前元素加载
                     let img = new Image();//创建Img标签
                     img.src=val.value;//获取当前的val值
                     img.onload=function () {//当加载完成之后
