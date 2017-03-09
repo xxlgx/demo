@@ -44,7 +44,6 @@
     export default {
         data() {
             return {
-                msg: '这是group'
             }
         }
     }
