@@ -14892,7 +14892,7 @@
 /* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "9f5063da9f5d2a404de7872160db22d4.gif";
+	module.exports = __webpack_require__.p + "images/loading.gif";
 
 /***/ },
 /* 59 */
